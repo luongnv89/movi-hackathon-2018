@@ -1,2 +1,2 @@
-# movi-hackathon-2018
-City Guide Car - Hackathon 2018
+Run: `cd wwww; npm start`
+Open http://localhost:3000
