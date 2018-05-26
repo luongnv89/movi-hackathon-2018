@@ -1,27 +1,51 @@
+
 html,
-body{
+body,
+#map{
   height: 100%;
   width: 100%;
   margin: 0px;
-  padding: 0px
+  padding: 0px;
+  font-size: 18px;
+}
+  
+body{
+  font-size: 18px;
+}  
+  
+div.media-left > img{
+  width: 100px;
+  height: auto;
 }
 
-#map{
-	position: fixed;
-	height: 100%;
-  width: 100%;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	bottom: 200px;
+.btn-tag{
+  padding: 10px;
+  margin: 5px;
 }
 
-#info{
-	position: fixed;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	height: 130px;
-	background-color: white;
-	display:none;
+.tagsDOM{
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.placeDOM{
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+#startButton{
+  padding: 20px;
+  margin: 10px;
+}
+
+#list-place-DOM{
+    max-height: 300px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.selected-place{
+  background-color: lightgreen;
 }
