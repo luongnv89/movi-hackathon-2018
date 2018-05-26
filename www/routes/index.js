@@ -84,8 +84,72 @@ router.post('/nearby', function(req, res, next){
 	}
 });
 
-var allTags = [
-    "monument",
+/* GET home page. */
+router.get('/route', function (req, res, next) {
+  res.send('Return the maps with informaion');
+});
+
+router.post('/',function (req, res, next) {
+  var u_name = 'Anonymous';
+  var user_id = req.body.user_id;
+  var current_x = req.body.x;
+  var current_y = req.body.y;
+  var tags = ['shopping','sight', 'monument'];
+  var places = null;
+  if (user_id !== '') {
+    // This is the first request -> need to request to get user's name and user's tags
+    var u_data = get_user_by_id(user_id);
+    u_name = u_data['name'];
+    tags = u_data['tags'];
+  }
+  // Calculate to get the location
+  // Request server to get the t_places and r_places
+  places = get_places(tags);
+  all_tags = get_all_tags();
+  res.send({user_name: u_name, places: places, all_tags: all_tags, tags: tags});
+})
+
+router.post('/search', function (req, res, next) {
+  var user_id = req.body.user_id;
+  var current_x = req.body.x;
+  var current_y = req.body.y;
+  var tags = req.body.tags; // must not be null
+  console.log(req.body);
+  var places = null;
+  if (user_id !== '') {
+    // This is the first request -> need to request to get user's name and user's tags
+    update_user_tags(user_id, tags);
+  }
+  // Calculate to get the location
+  // Request server to get the t_places and r_places
+  places = get_places(tags);
+  res.send({places: places, tags: tags});
+});
+
+
+router.get('/place', function (req, res, next) {
+  res.send('Return the information of a special place');
+});
+
+router.get('/', function (req, res, next) {
+  res.render('index');
+});
+
+function get_user_by_id(u_id) {
+  // Connect to database to get data
+  return users[0];
+}
+
+function get_places(tags) {
+  return [places[0],places[1],places[2],places[3]];
+}
+
+function update_user_tags(user_id, new_tags) {
+  console.log('Update user tag: ',user_id, new_tags);
+}
+
+function get_all_tags() {
+  return ["monument",
     "sight",
     "museum",
     "concert",
