@@ -167,6 +167,7 @@ div.media-left > img{
     border: 0;
     border-radius: 5px;
     padding: 5px; 	
+    transition: all .5s ease-in-out;
 }
 
 #voice-icon canvas {

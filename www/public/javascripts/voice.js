@@ -5,7 +5,7 @@ function text2speech( text, callbackOnEnd ){
    msg.voiceURI = 'native';
    msg.volume = 1; // 0 to 1
    msg.rate = 1; // 0.1 to 10
-   msg.pitch = 2; //0 to 2
+   msg.pitch = 1.5; //0 to 2
    msg.text = text;
    msg.lang = 'en-US';
    msg.onend = callbackOnEnd;
@@ -25,7 +25,6 @@ function _print2Screen( text, color ){
       color = "blueviolet";
    
    $("#voice-text").html( text ).css("text-algin", color);
-   
 }
 
 const recognition = new webkitSpeechRecognition();
@@ -63,6 +62,7 @@ $(function(){
       amplitude: .1,
       autostart: true
    });
+   
    siriWave.isStarting = false;
    $("#voice-icon").click( function(){
       siriWave.isStarting = !siriWave.isStarting;
@@ -72,6 +72,7 @@ $(function(){
          _speech2text();
       }else{
          siriWave.amplitude = .1;
+         recognition.stop();
       }
    })
 })

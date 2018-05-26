@@ -289,7 +289,7 @@ function showNearBy(x, y){
    for( var i=0; i<places.length; i++ ){
       var d = distance( x, y, places[i].location.x, places[i].location.y, 'K');
       //console.log( "distance " + d );
-      if( d <= .4){
+      if( d <= .3){
          if( ! places[i].isShowing ){
             text2speech("You are passing " +  places[i].name );
             addMarker(  places[i].location.x, places[i].location.y, places[i].photos[0], places[i].name, places[i].id );
