@@ -185,10 +185,11 @@ function update_start_button() {
   // console.log('selected_places: ', selected_places);
   var startButton = document.getElementById('startButton');
   var start_url = '/map?x=' + location_x + '&y=' + location_y + '&target=';
+  var locs = [];
   selected_places.forEach(place => {
-    start_url += '[' + place['location']['x'] + ',' + place['location']['y'] + '],';
+    locs.push( '[' + place['location']['x'] + ',' + place['location']['y'] + ']' );
   });
-  startButton.setAttribute('href', start_url);
+  startButton.setAttribute('href', start_url + locs.join(","));
 }
 
 // console.log('home.js has been loaded!');

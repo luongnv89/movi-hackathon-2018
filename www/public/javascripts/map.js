@@ -164,7 +164,7 @@ function showTracking() {
       c++;
       if (c > arrayOfTrackingPoints.length) 
          clearInterval(interval);
-   }, 2000);
+   }, 1000);
 }
 
 
