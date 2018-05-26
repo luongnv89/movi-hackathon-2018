@@ -1,8 +1,8 @@
 // Assign handlers immediately after making the request,
 // and remember the jqxhr object for this request
 var user_id = 1;
-var location_x = 14354.434;
-var location_y = 324325.434;
+var location_x = 48.831357;
+var location_y = 2.284441;
 var user_name = 'User';
 var selected_tags = [];
 var all_tags = [];
@@ -185,7 +185,7 @@ function create_start_button(location_x, location_y, places) {
 function update_start_button() {
   // console.log('selected_places: ', selected_places);
   var startButton = document.getElementById('startButton');
-  var start_url = '/route?x=' + location_x + '&y=' + location_y + '&target=';
+  var start_url = '/map?x=' + location_x + '&y=' + location_y + '&target=';
   selected_places.forEach(place => {
     start_url += '[' + place['location']['x'] + ',' + place['location']['y'] + '],';
   });

@@ -29,17 +29,12 @@ function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
 
-/* GET home page. */
-router.get('/route', function (req, res, next) {
-  res.send('Return the maps with informaion');
-});
-
 router.post('/', function (req, res, next) {
   var u_name = 'Anonymous';
   var user_id = req.body.user_id;
   var current_x = req.body.x;
   var current_y = req.body.y;
-  var tags = ['shopping', 'sight', 'monument'];
+  var tags = ['museum'];
   var places = null;
   if (user_id !== '') {
     // This is the first request -> need to request to get user's name and user's tags
@@ -51,9 +46,10 @@ router.post('/', function (req, res, next) {
   }
   // Calculate to get the location
   // Request server to get the t_places and r_places
-  places = get_places(tags);
-  all_tags = get_all_tags();
-  res.send({ user_name: u_name, places: places, all_tags: all_tags, tags: tags });
+  get_places(tags,function (data) {
+      all_tags = get_all_tags();
+      res.send({ user_name: u_name, places: data, all_tags: all_tags, tags: tags });
+  });
 })
 
 router.post('/search', function (req, res, next) {
@@ -69,8 +65,9 @@ router.post('/search', function (req, res, next) {
   }
   // Calculate to get the location
   // Request server to get the t_places and r_places
-  places = get_places(tags);
-  res.send({ places: places, tags: tags });
+  get_places(tags,function (data) {
+      res.send({ places: data, tags: tags });
+  });
 });
 
 
@@ -83,7 +80,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/map', function(req, res, next) {
-  res.render('map', { title: 'Express' });
+  res.render('map', { title: 'City Guide Car' });
 });
 
 function get_user_by_id(u_id) {
@@ -106,42 +103,46 @@ router.post('/nearby', function (req, res, next) {
   var places = null;
   // Calculate to get the location
   // Request server to get the t_places and r_places
-  places = get_nearby_places(tags, current_x, current_y);
-  res.send({ places: places });
+  get_nearby_places(tags, current_x, current_y,function (data) {
+      res.send({ places: data });
+  });
+
 })
 
-function get_nearby_places(tags, location_x, location_y) {
+function get_nearby_places(tags, location_x, location_y, callback) {
   if (tags &&
     location_x &&
     location_y) {
-    db.collection("places").find({ tag: req.body.tags }, function (erro, place) {
+    db.collection("places").find({ tags: tags }).toArray(function (erro, place) {
       if (erro || (place === null)) {
-        res.render('error', { message: 'Error', error: { status: 'Find place failed', stack: '' } });
+        callback(null);
       }
       else {
-        //place[i].name, place[i].description, place[i].price, place[i].tag, place[i].photo
-        //getDistanceFromLatLonInKm < 1km : Display
+        //TODO: remove places based on location
+        callback(place);
       }
     });
   }
 };
 
-function get_places(tags) {
+function get_places(tags, callback) {
   if (tags) {
+    // console.log(tags);
     //user.id, user.name, user.tags
-    db.collection("places").find({ tag: tags }, function (erro, place) {
+    db.collection("places").find({ tags: tags }).toArray(function (erro, place) {
       if (erro || (place === null)) {
-        return null;
+        callback(null);
       }
       else {
-        return place;
+        // console.log('place: ',place);
+        callback(place);
       }
     });
   }
 }
 
 function update_user_tags(user_id, new_tags) {
-  console.log('Update user tag: ', user_id, new_tags);
+  console.log('Update user tags: ', user_id, new_tags);
 }
 
 function get_all_tags() {
