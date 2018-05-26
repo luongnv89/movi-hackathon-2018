@@ -137,3 +137,39 @@ div.media-left > img{
   text-align: left;
   color: green;
 }
+
+#voice{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 1500px;
+	height: 100px;
+	z-index: 1000;
+}
+
+#voice-icon{
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   width: 1500px;
+   height: 100px;
+   
+}
+#voice-text{
+   position: absolute;
+   top: 10px;
+   text-align: right;
+   right: 150px;
+   z-index: 1000;
+   background-color: blueviolet;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    padding: 5px; 	
+}
+
+#voice-icon canvas {
+   position: absolute;
+   z-index: 1000;
+	right: 10px;
+}

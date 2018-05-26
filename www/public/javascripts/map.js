@@ -257,8 +257,8 @@ function showConfirmDialog(){
 }
 
 function showInfo(){
-   $("#map").css("bottom", "130px");
-   $("#info").css("height", "130px");
+   $("#map").css("bottom", "120px");
+   $("#info").css("height", "120px");
 }
 
 function hideInfo(){

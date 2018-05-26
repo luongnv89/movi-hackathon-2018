@@ -37,6 +37,31 @@ function getPlaces(user_id, location_x, location_y, tags) {
     })
 }
 
+function speechActions( txt ){
+   txt = txt.toLowerCase();
+   if( txt.indexOf( "start") > -1 || txt.indexOf( "go") > -1){
+      var href = $("#startButton").attr('href');
+      window.location.href = href;
+      return;
+   }
+   
+   if( txt.indexOf("profile")  > -1){
+      $(".btn-tag").each( function(){
+         if( txt.indexOf( $(this).text().toLowerCase() ) > -1 )
+            $(this).click();
+      });
+      return;
+   }
+   
+   if( txt.indexOf("select")  > -1){
+      $(".media-heading").each( function(){
+         if( txt.indexOf( $(this).text().toLowerCase() ) > -1 )
+            $(this).click();
+      });
+      return;
+   }
+}
+
 function update_main_content(user_name, all_tags, s_tags, places, location_x, location_y) {
   var mainContent = document.getElementById('main-content');
   mainContent.innerHTML = '';
@@ -219,4 +244,5 @@ function update_start_button() {
   startButton.setAttribute('href', start_url + locs.join(","));
 }
 
+speech2text( speechActions );
 // console.log('home.js has been loaded!');
