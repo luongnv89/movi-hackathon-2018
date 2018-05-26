@@ -103,9 +103,11 @@ router.post('/nearby', function (req, res, next) {
   var places = null;
   // Calculate to get the location
   // Request server to get the t_places and r_places
-  get_nearby_places(tags, current_x, current_y,function (data) {
-      res.send({ places: data });
-  });
+//  get_nearby_places(tags, current_x, current_y,function (data) {
+//      res.send({ places: data });
+//  });
+  
+  res.send({hihi:1});
 
 })
 

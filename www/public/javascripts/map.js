@@ -42,6 +42,8 @@ function initialize () {
       mapTypeId : google.maps.MapTypeId.ROADMAP
    } );
    myPositionMarker.setMap( map );
+   
+   loadRouteFromURL();
 }
 google.maps.event.addDomListener( window, "load", initialize );
 
@@ -94,6 +96,8 @@ function showRoute( ){
              lat: response.routes[0].overview_path[i].lat(), 
              lng: response.routes[0].overview_path[i].lng()});
         }
+         
+         showConfirmDialog();
       }
    } );
 }
@@ -134,12 +138,12 @@ function showTracking() {
       return;
    map.panTo( arrayOfTrackingPoints[0] );
    //zoom closer
-   map.setZoom( 17 );
+   map.setZoom( 16 );
    
    var c = 0;
    var interval = setInterval(function () {
       updateMyPosition( arrayOfTrackingPoints[c] );
-      console.log( "my position", arrayOfTrackingPoints[c] );
+      showNearBy( arrayOfTrackingPoints[c].lat, arrayOfTrackingPoints[c].lng );
       c++;
       if (c > arrayOfTrackingPoints.length) 
          clearInterval(interval);
@@ -148,25 +152,60 @@ function showTracking() {
 
 
 function loadRouteFromURL(){
-   updateMyPosition( {lat: parseInt(getUrlParameter("x")), lng: parseInt(getUrlParameter("y"))} );
+   var lat = parseInt(getUrlParameter("x"));
+   var lng = parseInt(getUrlParameter("y"));
+   updateMyPosition( {lat: lat, lng: lng} );
+   
+   //starting point
+   locations.push( [0, lat, lng] );
    
    var target = getUrlParameter("target");
    target = JSON.parse( "[" + target + "]" );
    for( var i=0; i<target.length; i++ ){
       var t = target[i];
-      locations.push( [i, t[0], t[1]] );
+      locations.push( [i+1, t[0], t[1]] );
    }
    showRoute();
 }
 
-$(function(){
-   setTimeout( loadRouteFromURL, 1000 ); 
-})
+function showConfirmDialog(){
+   showInfo();
+   $("#goBtn").on("click", function(){
+      hideInfo();
+      showTracking();
+   });
+   $("#cancelBtn").on("click", function(){
+      window.location="/";
+   });
+}
 
 function showInfo(){
-   $("#info").slideDown();
+   $("#map").css("bottom", "130px");
+   $("#info").css("height", "130px");
 }
 
 function hideInfo(){
-   $("#info").slideUp();
+   $("#map").css("bottom", "0px");
+   $("#info").css("height", "0px");
+}
+
+function showNearBy(x, y){
+   var data = {
+         x: x,
+         y: y,
+         user_id: "hoa",
+         tags: [ "sight", "museum", "concert" ]
+      };
+   
+   $.ajax({
+      type: "POST",
+      url: "/nearby",
+      data: data,
+      error: function(jqXHR, textStatus, errorMessage) {
+          console.log(errorMessage); // Optional
+      },
+      success: function(data) {
+         console.log(data)
+      } 
+  });
 }
