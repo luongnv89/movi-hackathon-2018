@@ -43,6 +43,7 @@ body{
    background-color: #ff2600;
     border: none;
     color: white;
+    z-index: 20000
 }
 #info input{
 	 background-color: #4CAF50;
@@ -101,7 +102,7 @@ div.media-left > img{
 	background-color: #ff2600 !important;
 }
 #list-place-DOM{
-    max-height: 300px;
+    max-height: 500px;
     margin-bottom: 10px;
     overflow:scroll;
     -webkit-overflow-scrolling: touch;
@@ -172,4 +173,5 @@ div.media-left > img{
    position: absolute;
    z-index: 1000;
 	right: 10px;
+	cursor:pointer;
 }

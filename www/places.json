@@ -5,8 +5,8 @@
 	"id": 1.0,
 	"name": "Eiffel Tower",
 	"location": {
-		"x": 48.51296,
-		"y": 2.17402
+		"x": 48.859027,
+		"y": 2.293419
 	},
 	"description": "It is practically impossible to imagine Paris without this tower. Nevertheless, this relationship of love between the Eiffel Tower and Paris has not always existed.When its construction was planned at the end of the 19 th century, the Parisians expressed their total rejection.In fact, in February 1887 the newspaper Le Temps published a letter from a group of intellectuals calling for the halting of the construction of that“ revolting column of sheet metal and screws”.Some people even called it metal asparagus. ",
 	"tags": [
@@ -28,8 +28,8 @@
 	"id": 2.0,
 	"name": "Arc de Triomphe",
 	"location": {
-		"x": 48.8738,
-		"y": 2.295423
+		"x": 48.873607,
+		"y": 2.295155
 	},
 	"description": "There are hundreds of triumphal arches all over the world, but without the slightest doubt, none are as monumental as that of Paris, photos of which really do not do it justice. Only standing before it can you appreciate its true size. Its 50 metres height and 45 metres width make it one of the biggest in the world. The Arc de Triomphe is in the Place de l’Etoile, at the western end of the avenue of the Champs Elysées.",
 	"tags": [
@@ -124,8 +124,8 @@
 	"id": 6.0,
 	"name": "Palais Garnier",
 	"location": {
-		"x": 48.5219,
-		"y": 2.1954
+		"x": 48.871186,
+		"y": 2.332041
 	},
 	"description": "Napoleon III wanted to build an “Imperial Academy of Music and Dance”. With this in mind he organised an international tender for which more than 170 projects were presented as bids. The winner was a young architect about whom practically nothing was known in Paris. His name was Charles Garnier. The construction of the palace formed part of an ambitious restructuring plan for Paris designed by Baron Haussmann in the mid-19th century.",
 	"tags": [
@@ -149,8 +149,8 @@
 	"id": 7.0,
 	"name": "Printemps Haussmann",
 	"location": {
-		"x": 48.874076,
-		"y": 2.328469
+		"x": 48.873793,
+		"y": 2.327285
 	},
 	"description": "Printemps is a French department store chain. The Printemps stores focus on beauty, lifestyle, fashion, accessories, and men's wear.",
 	"tags": [
@@ -168,8 +168,8 @@
 	"id": 8.0,
 	"name": "Place de la Concorde",
 	"location": {
-		"x": 48.5156,
-		"y": 2.1916
+		"x": 48.865626,
+		"y": 2.320678
 	},
 	"description": "If there is a square in Paris whose name does not do justice to its historical past, it is the Place de la Concorde.More than one thousand heads rolled off the guillotine in this square, showing that there was not as much concord as perhaps the name suggests.It is one of the most beautiful and largest squares in Paris.And measuring more than 8 hectares, it is also one of the largest in Europe.",
 	"tags": [
@@ -211,8 +211,8 @@
 	"id": 10.0,
 	"name": "Pont Alexandre III",
 	"location": {
-		"x": 48.5149,
-		"y": 2.1849
+		"x": 48.86285,
+		"y": 2.313441
 	},
 	"description": "Pont Alexandre III is considered as the most beautiful bridge in Paris and joins Les Invalides with the Petit and Grand Palais. Although many people believe that it was Alexander III who placed the first stone, you should be aware that it was Tzar Nicholas II, his successor, who wanted to pay homage to his father and give the bridge his name.The works began in 1896 and the bridge was opened in 1900 as part of the Universal Exhibition.",
 	"tags": [

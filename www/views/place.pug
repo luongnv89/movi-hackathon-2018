@@ -12,7 +12,7 @@ html
     // Latest compiled and minified JavaScript
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
   body
-    .container.text-center#main-content
+    .text-center#main-content
       #carousel-example-generic.carousel.slide(data-ride='carousel')
         // Indicators
         ol.carousel-indicators
@@ -26,10 +26,10 @@ html
           each image, i in place.photos
             if i==0
               .item.active
-                img.place_image(src=image, alt='...', style="height:400px; margin: auto")
+                img.place_image(src=image, alt='...', style="height:650px;width:100%; margin: auto")
             else
               .item
-                img.place_image(src=image, alt='...', style="height:400px; margin: auto")
+                img.place_image(src=image, alt='...', style="height:650px; width:100%; margin: auto")
         // Controls
         a.left.carousel-control(href='#carousel-example-generic', role='button', data-slide='prev')
           span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
@@ -45,5 +45,5 @@ html
           strong   unknown
         else
           strong  #{place.price}$
-      p=place.description
+      p(style="text-align:justify")=place.description
     audio.hidden(src=place.audio,autoplay=true)
