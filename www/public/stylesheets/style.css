@@ -78,8 +78,15 @@ div.media-left > img{
 
 .placeDOM{
   padding: 10px;
-  border: 1px solid gray;
-  border-radius: 10px;
+  text-transform: capitalize;
+  text-align: left;
+  /* border-radius: 5px; */
+  /* border: 1px solid grey; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.placeDOM .media-heading{
+  font-weight: bold;
 }
 
 #startButton{
@@ -102,6 +109,25 @@ div.media-left > img{
   height: 30px;
 }
 
+#projectname{
+  color: brown;
+}
+
 .place_image{
   height: 50%;
+}
+
+#tagDOMHeader{
+  text-align: left;
+  color: brown;
+}
+
+#listPlaceHeader{
+  text-align: left;
+  color: brown;
+}
+
+#beforeStartButton{
+  text-align: left;
+  color: green;
 }

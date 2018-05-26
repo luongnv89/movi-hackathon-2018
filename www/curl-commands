@@ -1,0 +1,8 @@
+curl --header "Content-Type: application/json" --request POST --data '{"place_id":"5"}' http://localhost:3000/place
+
+curl --header "Content-Type: application/json" --request POST --data '{"tags":["shopping"],"user_id":"1","location":{"x":"312434,5454","y":"4335454,343"}}' http://localhost:3000/nearby
+
+curl --header "Content-Type: application/json" --request POST --data '{"places":[],"tags":["shopping"]}' http://localhost:3000/search
+
+
+curl --header "Content-Type: application/json" --request POST --data "{'places':[],'tags':['shopping']}" http://localhost:3000/search
