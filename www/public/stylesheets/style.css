@@ -1,8 +1,27 @@
 html,
-body,
-#map{
+body{
   height: 100%;
   width: 100%;
   margin: 0px;
   padding: 0px
+}
+
+#map{
+	position: fixed;
+	height: 100%;
+  width: 100%;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 200px;
+}
+
+#info{
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 130px;
+	background-color: white;
+	display:none;
 }

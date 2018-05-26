@@ -13,11 +13,27 @@ const myPositionMarker  = new google.maps.Marker( {
 var markerList = {};
 var arrayOfTrackingPoints = [];
 
-var locations = [
-      [
-            'Manly Beach 0', 48.852, 2.348], [
-            'Manly Beach 1', 48.856, 2.344], [
-            'Manly Beach 2', 48.850, 2.245]];
+const locations = [
+//      [
+//            'Manly Beach 0', 48.852, 2.348], [
+//            'Manly Beach 1', 48.856, 2.344], [
+//            'Manly Beach 2', 48.850, 2.245]
+      ];
+
+function getUrlParameter( sParam ) {
+   var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+       sURLVariables = sPageURL.split('&'),
+       sParameterName,
+       i;
+
+   for (i = 0; i < sURLVariables.length; i++) {
+       sParameterName = sURLVariables[i].split('=');
+
+       if (sParameterName[0] === sParam) {
+           return sParameterName[1] === undefined ? true : sParameterName[1];
+       }
+   }
+};
 
 function initialize () {
    map = new google.maps.Map( document.getElementById( 'map' ), {
@@ -123,8 +139,34 @@ function showTracking() {
    var c = 0;
    var interval = setInterval(function () {
       updateMyPosition( arrayOfTrackingPoints[c] );
+      console.log( "my position", arrayOfTrackingPoints[c] );
       c++;
       if (c > arrayOfTrackingPoints.length) 
          clearInterval(interval);
    }, 2000);
+}
+
+
+function loadRouteFromURL(){
+   updateMyPosition( {lat: parseInt(getUrlParameter("x")), lng: parseInt(getUrlParameter("y"))} );
+   
+   var target = getUrlParameter("target");
+   target = JSON.parse( "[" + target + "]" );
+   for( var i=0; i<target.length; i++ ){
+      var t = target[i];
+      locations.push( [i, t[0], t[1]] );
+   }
+   showRoute();
+}
+
+$(function(){
+   setTimeout( loadRouteFromURL, 1000 ); 
+})
+
+function showInfo(){
+   $("#info").slideDown();
+}
+
+function hideInfo(){
+   $("#info").slideUp();
 }
