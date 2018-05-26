@@ -11,45 +11,25 @@ mongoose.connect('mongodb://localhost/hackathon', {
 });
 var db = mongoose.connection;
 
-function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-  var R = 6371; // Radius of the earth in km
-  var dLat = deg2rad(lat2 - lat1);  // deg2rad below
-  var dLon = deg2rad(lon2 - lon1);
-  var a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-    Math.sin(dLon / 2) * Math.sin(dLon / 2)
-    ;
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  var d = R * c; // Distance in km
-  return d;
-}
-
-function deg2rad(deg) {
-  return deg * (Math.PI / 180)
-}
-
 router.post('/', function (req, res, next) {
-  var u_name = 'Anonymous';
-  var user_id = req.body.user_id;
-  var current_x = req.body.x;
-  var current_y = req.body.y;
+  var u_name = 'User';
+  var user_id = Number(req.body.user_id);
   var tags = ['museum'];
   var places = null;
   if (user_id !== '') {
     // This is the first request -> need to request to get user's name and user's tags
-    var u_data = get_user_by_id(user_id);
-    if (u_data != null) {
-      u_name = u_data['name'];
-      tags = u_data['tags'];
-    }
+    get_user_by_id(user_id,function (u_data) {
+      if (u_data){
+        u_name = u_data['name'];
+        tags = u_data['tags'];
+      }
+
+      get_places(tags,function (data) {
+          all_tags = get_all_tags();
+          res.send({ user_name: u_name, places: data, all_tags: all_tags, tags: tags });
+      });
+    });
   }
-  // Calculate to get the location
-  // Request server to get the t_places and r_places
-  get_places(tags,function (data) {
-      all_tags = get_all_tags();
-      res.send({ user_name: u_name, places: data, all_tags: all_tags, tags: tags });
-  });
 })
 
 router.post('/search', function (req, res, next) {
@@ -65,7 +45,7 @@ router.post('/search', function (req, res, next) {
   }
   // Calculate to get the location
   // Request server to get the t_places and r_places
-  get_places(tags,function (data) {
+  get_places(tags, function (data) {
       res.send({ places: data, tags: tags });
   });
 });
@@ -83,14 +63,13 @@ router.get('/map', function(req, res, next) {
   res.render('map', { title: 'City Guide Car' });
 });
 
-function get_user_by_id(u_id) {
-  //res.render('view1', { UserName: 'Anonymous'});
-  db.collection("users").findOne({ u_id: 1 }, function (err, user) {
+function get_user_by_id(u_id, callback) {
+  db.collection("users").findOne({ id: u_id }, function (err, user) {
     if (err || (user === null)) {
-      return null;
+      callback(null);
     }
     else {
-      return user;
+      callback(user);
     }
   });
 }
@@ -119,6 +98,7 @@ function get_nearby_places(tags, location_x, location_y, callback) {
       }
       else {
         //TODO: remove places based on location
+        console.log('[get_nearby_places] place: ',place);
         callback(place);
       }
     });
@@ -127,14 +107,14 @@ function get_nearby_places(tags, location_x, location_y, callback) {
 
 function get_places(tags, callback) {
   if (tags) {
-    // console.log(tags);
+    console.log('[get_places] tags: ',tags);
     //user.id, user.name, user.tags
     db.collection("places").find({ tags: tags }).toArray(function (erro, place) {
       if (erro || (place === null)) {
         callback(null);
       }
       else {
-        // console.log('place: ',place);
+        console.log('[get_places] place: ',place);
         callback(place);
       }
     });
@@ -155,6 +135,24 @@ function get_all_tags() {
     "nightlift",
     "casino"
   ];
+}
+
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2 - lat1);  // deg2rad below
+  var dLon = deg2rad(lon2 - lon1);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    ;
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI / 180)
 }
 
 module.exports = router;
