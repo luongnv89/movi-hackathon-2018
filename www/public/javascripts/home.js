@@ -191,4 +191,12 @@ function update_start_button() {
   startButton.setAttribute('href', start_url);
 }
 
+function show_place_detail(place_id) {
+  var placeWindow = document.getElementById('placeWindow');
+  if(placeWindow){
+    placeWindow.setAttribute('src','/place?place_id='+place_id);
+    document.getElementById('btnOpenPlaceView').click();
+  }
+}
+
 // console.log('home.js has been loaded!');
