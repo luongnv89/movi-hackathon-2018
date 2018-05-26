@@ -110,7 +110,7 @@ function get_nearby_places(tags, location_x, location_y, callback) {
   if (tags &&
     location_x &&
     location_y) {
-    db.collection("places").find({ tags: tags }).toArray(function (erro, place) {
+    db.collection("places").find({ tags: {$elemMatch:{$in:tags}} }).toArray(function (erro, place) {
       if (erro || (place === null)) {
         callback(null);
       }
@@ -133,7 +133,7 @@ function get_places(tags, callback) {
   if (tags) {
     console.log('[get_places] tags: ', tags);
     // TODO: Improve by not completely matched tags
-    db.collection("places").find({ tags: tags }).toArray(function (erro, place) {
+    db.collection("places").find({ tags: {$elemMatch:{$in:tags}} }).toArray(function (erro, place) {
       if (erro || (place === null)) {
         callback(null);
       }
