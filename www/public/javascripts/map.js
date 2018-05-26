@@ -146,6 +146,16 @@ function updateMyPosition( pos ){
    myPositionMarker.setPosition( pos );
 }
 
+function getPlaceNearBy( x, y ){
+   for( var i=0; i<places.length; i++ ){
+      var d = distance( x, y, places[i].location.x, places[i].location.y, 'K');
+      //console.log( "distance " + d );
+      if( d <= .6)
+         return places[i];
+   }
+}
+
+var isEndOfTrip = false;
 
 function showTracking() {
    if( arrayOfTrackingPoints.length == 0 )
@@ -170,7 +180,14 @@ function showTracking() {
          setTimeout( _detail, 300);
       else{
          //end of internerate
-         text2speech("You have arrived your destination. Have a good day!")
+         text2speech("You have arrived your destination. Have a good day!");
+         var p = getPlaceNearBy( arrayOfTrackingPoints[index-1].lat, arrayOfTrackingPoints[index-1].lng );
+         if( p )
+            setTimeout( function( p ){
+               loadDetailPlace( "/place?place_id=" + p.id );
+               isEndOfTrip = true;
+            }, 4000, p);
+            
       }
    }
    setTimeout( _detail, 1000);
@@ -205,11 +222,15 @@ function loadDetailPlace( url ){
    
    
    $("#closeBtn").click(function(){
+      if( isEndOfTrip ){
+         window.location = "/";
+         return;
+      }
       $("iframe").attr("src", "about:blank");
       $("#frame").css({
          "height": "0px",
          "display" : "none"
-      })
+      });
    })
 }
 
@@ -245,6 +266,7 @@ function hideInfo(){
    $("#info").css("height", "0px");
 }
 
+
 function showNearBy(x, y){
 //   var data = {
 //         x: x,
@@ -267,7 +289,7 @@ function showNearBy(x, y){
    for( var i=0; i<places.length; i++ ){
       var d = distance( x, y, places[i].location.x, places[i].location.y, 'K');
       //console.log( "distance " + d );
-      if( d <= .6){
+      if( d <= .8){
          if( ! places[i].isShowing ){
             text2speech("You are passing " +  places[i].name );
             addMarker(  places[i].location.x, places[i].location.y, places[i].photos[0], places[i].name, places[i].id );

@@ -32,8 +32,9 @@ body{
    right: 0px;
    height: 0px;
    transition: all .5s ease-in-out; 
-   background-color: black;
+   background-color: #EEE;
    text-align: center;
+   border-top: thin solid #ccc
 }
 
 #closeBtn{
@@ -54,6 +55,9 @@ body{
     font-size: 16px;
     margin: 50px 20px;
     cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    will-change: box-shadow,transform;
 }
 
 
@@ -93,7 +97,9 @@ div.media-left > img{
   padding: 20px;
   margin: 10px;
 }
-
+#cancelBtn{
+	background-color: #ff2600 !important;
+}
 #list-place-DOM{
     max-height: 300px;
     margin-bottom: 10px;

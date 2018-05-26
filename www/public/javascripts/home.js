@@ -1,8 +1,8 @@
 // Assign handlers immediately after making the request,
 // and remember the jqxhr object for this request
 var user_id = 2;
-var location_x = 48.8488433;
-var location_y = 2.2789847;
+var location_x = 48.848782;
+var location_y = 2.302870;
 
 var user_name = 'User';
 var selected_tags = [];
