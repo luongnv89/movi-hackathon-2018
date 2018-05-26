@@ -115,13 +115,13 @@ function get_nearby_places(tags, location_x, location_y) {
   if (tags &&
     location_x &&
     location_y) {
-    db.collection("places").find({ tags: req.body.tags }, function (erro, place) {
+    db.collection("places").find({ tags: tags }).toArray(function (erro, place) {
       if (erro || (place === null)) {
         res.render('error', { message: 'Error', error: { status: 'Find place failed', stack: '' } });
       }
       else {
-        //place[i].name, place[i].description, place[i].price, place[i].tag, place[i].photo
-        //getDistanceFromLatLonInKm < 1km : Display
+        //TODO: remove places based on location
+        return place;
       }
     });
   }
