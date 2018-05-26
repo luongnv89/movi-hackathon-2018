@@ -26,10 +26,10 @@ html
           each image, i in place.photos
             if i==0
               .item.active
-                img.place_image(src=image, alt='...')
+                img.place_image(src=image, alt='...', style="height:400px; margin: auto")
             else
               .item
-                img.place_image(src=image, alt='...')
+                img.place_image(src=image, alt='...', style="height:400px; margin: auto")
         // Controls
         a.left.carousel-control(href='#carousel-example-generic', role='button', data-slide='prev')
           span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
@@ -37,13 +37,13 @@ html
         a.right.carousel-control(href='#carousel-example-generic', role='button', data-slide='next')
           span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
           span.sr-only Next
-    h1=place.name
-    h3 Price:
-      if place.price == -1
-        strong   unknown
-      else
-        strong  #{place.price}$
-    p=place.description
+    center
+      h1=place.name
+    div(style="padding:10px")
+      h3 Price:
+        if place.price == -1
+          strong   unknown
+        else
+          strong  #{place.price}$
+      p=place.description
     audio.hidden(src=place.audio,autoplay=true)
-    button.btn.btn-lg.btn-danger#startButton
-      .fa.fa-times-circle   Close

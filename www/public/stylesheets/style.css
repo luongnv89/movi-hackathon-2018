@@ -8,14 +8,23 @@ body{
   font-size: 18px;
 }
 #map{
-	position: absolute;
+  position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
   transition: all .5s ease-in-out;
 }
-  
+
+#frame{
+   position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 0px;
+  transition: all .5s ease-in-out;
+  display: none;
+}  
 #info{
    position:fixed;
    bottom: 0px;
@@ -27,6 +36,13 @@ body{
    text-align: center;
 }
 
+#closeBtn{
+	position: absolute;
+   right: 0px;
+   background-color: #ff2600;
+    border: none;
+    color: white;
+}
 #info input{
 	 background-color: #4CAF50;
     border: none;
@@ -39,6 +55,7 @@ body{
     margin: 50px 20px;
     cursor: pointer;
 }
+
 
 body{
   font-size: 18px;

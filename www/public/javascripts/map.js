@@ -127,7 +127,7 @@ function addMarker(lat, long, photo, title, id) {
    marker.setMap(map);
    
    marker.addListener('click', function( ev) {
-      window.location = "/place?place_id="+ id ;
+      loadDetailPlace("/place?place_id="+ id) ;
     }, id);
    
    markerList[ lat + "-" + long ] = marker;
@@ -157,14 +157,16 @@ function showTracking() {
    //zoom closer
    map.setZoom( 15 );
    
-   var c = 0;
-   var interval = setInterval(function () {
-      updateMyPosition( arrayOfTrackingPoints[c] );
-      showNearBy( arrayOfTrackingPoints[c].lat, arrayOfTrackingPoints[c].lng );
-      c++;
-      if (c > arrayOfTrackingPoints.length) 
-         clearInterval(interval);
-   }, 1000);
+   var index = 1;
+   var _detail = function () {
+      updateMyPosition( arrayOfTrackingPoints[ index ] );
+      showNearBy( arrayOfTrackingPoints[index].lat, arrayOfTrackingPoints[index].lng );
+      index ++;
+      
+      if (index < arrayOfTrackingPoints.length) 
+         setTimeout( _detail, 1000);
+   }
+   setTimeout( _detail, 1000);
 }
 
 
@@ -183,6 +185,25 @@ function loadRouteFromURL(){
       locations.push( [i+1, t[0], t[1]] );
    }
    showRoute();
+}
+
+function loadDetailPlace( url ){
+   
+   $("iframe").attr("src", url);
+   setTimeout(function(){
+      $("#frame").css({
+         "height": $(document).height(),
+         "display": "block"});
+   }, 500 );
+   
+   
+   $("#closeBtn").click(function(){
+      $("iframe").attr("src", "about:blank");
+      $("#frame").css({
+         "height": "0px",
+         "display" : "none"
+      })
+   })
 }
 
 function showConfirmDialog(){
@@ -227,7 +248,7 @@ function showNearBy(x, y){
 //  });
    for( var i=0; i<places.length; i++ ){
       var d = distance( x, y, places[i].location.x, places[i].location.y, 'K');
-      console.log( "distance " + d );
+      //console.log( "distance " + d );
       if( d <= .6){
          if( ! places[i].isShowing ){
             addMarker(  places[i].location.x, places[i].location.y, places[i].photos[0], places[i].name, places[i].id );
