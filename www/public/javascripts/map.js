@@ -144,9 +144,6 @@ function removeMarker( lat, long ){
 //pos = {lat: lat, lng: long };
 function updateMyPosition( pos ){
    myPositionMarker.setPosition( pos );
-   setTimeout( function( p ){
-      map.panTo( p );
-   }, 500, pos );
 }
 
 
@@ -158,13 +155,23 @@ function showTracking() {
    map.setZoom( 15 );
    
    var index = 1;
+   var counter = 0;
    var _detail = function () {
       updateMyPosition( arrayOfTrackingPoints[ index ] );
+      if( counter == 10 ){
+         map.panTo( arrayOfTrackingPoints[ index ] );
+         counter = 0;
+      }
+      counter ++;
       showNearBy( arrayOfTrackingPoints[index].lat, arrayOfTrackingPoints[index].lng );
       index ++;
       
       if (index < arrayOfTrackingPoints.length) 
-         setTimeout( _detail, 1000);
+         setTimeout( _detail, 300);
+      else{
+         //end of internerate
+         text2speech("You have arrived your destination. Have a good day!")
+      }
    }
    setTimeout( _detail, 1000);
 }
@@ -251,6 +258,7 @@ function showNearBy(x, y){
       //console.log( "distance " + d );
       if( d <= .6){
          if( ! places[i].isShowing ){
+            text2speech("You are passing " +  places[i].name );
             addMarker(  places[i].location.x, places[i].location.y, places[i].photos[0], places[i].name, places[i].id );
             places[i].isShowing = true;
          }
