@@ -18,15 +18,15 @@ router.post('/', function (req, res, next) {
   var places = null;
   if (user_id !== 0) {
     // This is the first request -> need to request to get user's name and user's tags
-    get_user_by_id(user_id,function (u_data) {
-      if (u_data){
+    get_user_by_id(user_id, function (u_data) {
+      if (u_data) {
         u_name = u_data['name'];
         tags = u_data['tags'];
       }
 
-      get_places(tags,function (data) {
-          all_tags = get_all_tags();
-          res.send({ user_name: u_name, places: data, all_tags: all_tags, tags: tags });
+      get_places(tags, function (data) {
+        all_tags = get_all_tags();
+        res.send({ user_name: u_name, places: data, all_tags: all_tags, tags: tags });
       });
     });
   }
@@ -45,7 +45,7 @@ router.post('/search', function (req, res, next) {
   // Calculate to get the location
   // Request server to get the t_places and r_places
   get_places(tags, function (data) {
-      res.send({ places: data, tags: tags });
+    res.send({ places: data, tags: tags });
   });
 });
 
@@ -57,7 +57,7 @@ router.post('/place', function (req, res, next) {
   })
 });
 
-router.get('/map', function(req, res, next) {
+router.get('/map', function (req, res, next) {
   res.render('map', { title: 'City Guide Car' });
 });
 
@@ -69,8 +69,8 @@ router.post('/nearby', function (req, res, next) {
   var places = null;
   // Calculate to get the location
   // Request server to get the t_places and r_places
-  get_nearby_places(tags, current_x, current_y,function (data) {
-      res.send({ places: data });
+  get_nearby_places(tags, current_x, current_y, function (data) {
+    res.send({ places: data });
   });
 
 })
@@ -111,7 +111,13 @@ function get_nearby_places(tags, location_x, location_y, callback) {
       }
       else {
         //TODO: remove places based on location
-        console.log('[get_nearby_places] place: ',place);
+        console.log('[get_nearby_places] place: ', place);
+        //DONE: remove places based on location
+        for (var i = place.length - 1; i >= 0; i--) {
+          if (getDistanceFromLatLonInKm(place[i].location.x, place[i].location.y, location_x, location_y) < 1) {
+            place.splice(i, 1);
+          }
+        }
         callback(place);
       }
     });
@@ -120,14 +126,14 @@ function get_nearby_places(tags, location_x, location_y, callback) {
 
 function get_places(tags, callback) {
   if (tags) {
-    console.log('[get_places] tags: ',tags);
-    //user.id, user.name, user.tags
+    console.log('[get_places] tags: ', tags);
+    // TODO: Improve by not completely matched tags
     db.collection("places").find({ tags: tags }).toArray(function (erro, place) {
       if (erro || (place === null)) {
         callback(null);
       }
       else {
-        console.log('[get_places] place: ',place);
+        console.log('[get_places] place: ', place);
         callback(place);
       }
     });
@@ -136,6 +142,9 @@ function get_places(tags, callback) {
 
 function update_user_tags(user_id, new_tags) {
   console.log('Update user tags: ', user_id, new_tags);
+  db.collection("users").updateOne({ id: user_id }, { $set: { tags: new_tags } }, function (error, res) {
+    if (error) return null;
+  });
 }
 
 function get_all_tags() {
