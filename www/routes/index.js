@@ -37,7 +37,6 @@ router.post('/search', function (req, res, next) {
   var current_x = req.body.x;
   var current_y = req.body.y;
   var tags = req.body.tags; // must not be null
-  console.log(req.body);
   var places = null;
   if (user_id !== '') {
     // This is the first request -> need to request to get user's name and user's tags
@@ -51,17 +50,45 @@ router.post('/search', function (req, res, next) {
 });
 
 
-router.get('/place', function (req, res, next) {
-  res.send('Return the information of a special place');
-});
-
-router.get('/', function (req, res, next) {
-  res.render('index');
+router.post('/place', function (req, res, next) {
+  var place_id = Number(req.body.place_id);
+  get_place_by_id(place_id, function (data) {
+    res.send(data);
+  })
 });
 
 router.get('/map', function(req, res, next) {
   res.render('map', { title: 'City Guide Car' });
 });
+
+router.post('/nearby', function (req, res, next) {
+  var user_id = req.body.user_id;
+  var current_x = req.body.location['x'];
+  var current_y = req.body.location['y'];
+  var tags = req.body.tags; // must not be null
+  var places = null;
+  // Calculate to get the location
+  // Request server to get the t_places and r_places
+  get_nearby_places(tags, current_x, current_y,function (data) {
+      res.send({ places: data });
+  });
+
+})
+
+router.get('/', function (req, res, next) {
+  res.render('index');
+});
+
+function get_place_by_id(p_id, callback) {
+  db.collection("places").findOne({ id: p_id }, function (err, user) {
+    if (err || (user === null)) {
+      callback(null);
+    }
+    else {
+      callback(user);
+    }
+  });
+}
 
 function get_user_by_id(u_id, callback) {
   db.collection("users").findOne({ id: u_id }, function (err, user) {
@@ -73,20 +100,6 @@ function get_user_by_id(u_id, callback) {
     }
   });
 }
-
-router.post('/nearby', function (req, res, next) {
-  var user_id = req.body.user_id;
-  var current_x = req.body.x;
-  var current_y = req.body.y;
-  var tags = req.body.tags; // must not be null
-  var places = null;
-  // Calculate to get the location
-  // Request server to get the t_places and r_places
-  get_nearby_places(tags, current_x, current_y,function (data) {
-      res.send({ places: data });
-  });
-
-})
 
 function get_nearby_places(tags, location_x, location_y, callback) {
   if (tags &&
