@@ -12,6 +12,7 @@ const myPositionMarker  = new google.maps.Marker( {
 
 var markerList = {};
 var arrayOfTrackingPoints = [];
+var places = [];
 
 const locations = [
 //      [
@@ -44,6 +45,10 @@ function initialize () {
    myPositionMarker.setMap( map );
    
    loadRouteFromURL();
+   
+   $.get("/places", function( data ){
+      places = data;
+   });
 }
 google.maps.event.addDomListener( window, "load", initialize );
 
@@ -106,12 +111,24 @@ function hideRoute(){
    directionsDisplay.setMap( null );
 }
 
-function addMarker(lat, long) {
+function addMarker(lat, long, photo, title, id) {
    var marker = new google.maps.Marker({
      position: new google.maps.LatLng(lat, long),
-     animation: google.maps.Animation.BOUNCE
+     animation: google.maps.Animation.BOUNCE,
+     icon: {
+        url: photo,
+        scaledSize: new google.maps.Size(50, 50), // scaled size
+        origin: new google.maps.Point(0,0), // origin
+        anchor: new google.maps.Point(0, 0) // anchor
+    },
+    title: title,
+    id: id
    });
    marker.setMap(map);
+   
+   marker.addListener('click', function( ev) {
+      window.location = "/place?id="+ id ;
+    }, id);
    
    markerList[ lat + "-" + long ] = marker;
 }
@@ -138,7 +155,7 @@ function showTracking() {
       return;
    map.panTo( arrayOfTrackingPoints[0] );
    //zoom closer
-   map.setZoom( 16 );
+   map.setZoom( 15 );
    
    var c = 0;
    var interval = setInterval(function () {
@@ -152,8 +169,8 @@ function showTracking() {
 
 
 function loadRouteFromURL(){
-   var lat = parseInt(getUrlParameter("x"));
-   var lng = parseInt(getUrlParameter("y"));
+   var lat = parseFloat(getUrlParameter("x"));
+   var lng = parseFloat(getUrlParameter("y"));
    updateMyPosition( {lat: lat, lng: lng} );
    
    //starting point
@@ -190,22 +207,80 @@ function hideInfo(){
 }
 
 function showNearBy(x, y){
-   var data = {
-         x: x,
-         y: y,
-         user_id: "hoa",
-         tags: [ "sight", "museum", "concert" ]
-      };
-   
-   $.ajax({
-      type: "POST",
-      url: "/nearby",
-      data: data,
-      error: function(jqXHR, textStatus, errorMessage) {
-          console.log(errorMessage); // Optional
-      },
-      success: function(data) {
-         console.log(data)
-      } 
-  });
+//   var data = {
+//         x: x,
+//         y: y,
+//         user_id: "hoa",
+//         tags: [ "sight", "museum", "concert" ]
+//      };
+//   
+//   $.ajax({
+//      type: "POST",
+//      url: "/nearby",
+//      data: data,
+//      error: function(jqXHR, textStatus, errorMessage) {
+//          console.log(errorMessage); // Optional
+//      },
+//      success: function(data) {
+//         console.log(data)
+//      } 
+//  });
+   for( var i=0; i<places.length; i++ ){
+      var d = distance( x, y, places[i].location.x, places[i].location.y, 'K');
+      console.log( "distance " + d );
+      if( d <= .6){
+         if( ! places[i].isShowing ){
+            addMarker(  places[i].location.x, places[i].location.y, places[i].photos[0], places[i].name, places[i].id );
+            places[i].isShowing = true;
+         }
+      }else{
+         if( places[i].isShowing )
+            removeMarker(  places[i].location.x, places[i].location.y );
+      }
+   }
+}
+
+
+
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::                                                                         :::
+//:::  This routine calculates the distance between two points (given the     :::
+//:::  latitude/longitude of those points). It is being used to calculate     :::
+//:::  the distance between two locations using GeoDataSource (TM) prodducts  :::
+//:::                                                                         :::
+//:::  Definitions:                                                           :::
+//:::    South latitudes are negative, east longitudes are positive           :::
+//:::                                                                         :::
+//:::  Passed to function:                                                    :::
+//:::    lat1, lon1 = Latitude and Longitude of point 1 (in decimal degrees)  :::
+//:::    lat2, lon2 = Latitude and Longitude of point 2 (in decimal degrees)  :::
+//:::    unit = the unit you desire for results                               :::
+//:::           where: 'M' is statute miles (default)                         :::
+//:::                  'K' is kilometers                                      :::
+//:::                  'N' is nautical miles                                  :::
+//:::                                                                         :::
+//:::  Worldwide cities and other features databases with latitude longitude  :::
+//:::  are available at https://www.geodatasource.com                          :::
+//:::                                                                         :::
+//:::  For enquiries, please contact sales@geodatasource.com                  :::
+//:::                                                                         :::
+//:::  Official Web site: https://www.geodatasource.com                        :::
+//:::                                                                         :::
+//:::               GeoDataSource.com (C) All Rights Reserved 2017            :::
+//:::                                                                         :::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+function distance(lat1, lon1, lat2, lon2, unit) {
+var radlat1 = Math.PI * lat1/180
+var radlat2 = Math.PI * lat2/180
+var theta = lon1-lon2
+var radtheta = Math.PI * theta/180
+var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+dist = Math.acos(dist)
+dist = dist * 180/Math.PI
+dist = dist * 60 * 1.1515
+if (unit=="K") { dist = dist * 1.609344 }
+if (unit=="N") { dist = dist * 0.8684 }
+return dist
 }

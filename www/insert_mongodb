@@ -1,15 +1,12 @@
-mongo
-
-use hackathon
-
-db.users.insertMany([{
+users = [
+    {
         id: 1,
         name: "Luong",
         tags:[
             "museum",
             "concert"
         ]
-
+       
     },
 
     {
@@ -18,36 +15,39 @@ db.users.insertMany([{
         tags:[
             "shopping", "sight", "monument"
         ]
-    }])
+    }
+];
 
 
-db.places.insertMany([{
+places = [
+    {
         id: 1,
         name: "Tour Eiffel",
         location:{
             x: 48.51296,
             y: 2.17402
         },
-        description:"The Eiffel Tower is a wrought iron lattice tower on the Champ de Mars in Paris, France. It is named after the engineer Gustave Eiffel, whose company designed and built the tower. Constructed from 1887–89 as the entrance to the 1889 World's Fair, it was initially criticized by some of France's leading artists and intellectuals for its design, but it has become a global cultural icon of France and one of the most recognisable structures in the world. The Eiffel Tower is the most-visited paid monument in the world; 6.91 million people ascended it in 2015. The tower is 324 metres (1,063 ft) tall, about the same height as an 81-storey building, and the tallest structure in Paris. Its base is square, measuring 125 metres (410 ft) on each side. During its construction, the Eiffel Tower surpassed the Washington Monument to become the tallest man-made structure in the world, a title it held for 41 years until the Chrysler Building in New York City was finished in 1930. Due to the addition of a broadcasting aerial at the top of the tower in 1957, it is now taller than the Chrysler Building by 5.2 metres (17 ft). Excluding transmitters, the Eiffel Tower is the second tallest structure in France after the Millau Viaduct.",
+        description: "It is practically impossible to imagine Paris without this tower. Nevertheless, this relationship of love between the Eiffel Tower and Paris has not always existed.When its construction was planned at the end of the 19 th century, the Parisians expressed their total rejection.In fact, in February 1887 the newspaper Le Temps published a letter from a group of intellectuals calling for the halting of the construction of that“ revolting column of sheet metal and screws”.Some people even called it metal asparagus. ",
         tags:["monument", "sight"],
         price: 25,
         photos: [
             "https://www.planetware.com/photos-large/F/eiffel-tower.jpg",
             "https://www.rd.com/wp-content/uploads/2017/07/The-Eiffel-Towers-Electric-Bill-Is-Absurd_166143854_Brian-Kinney-760x506.jpg",
-            "https://cdn.images.express.co.uk/img/dynamic/78/590x/paris-eiffel-tower-767204.jpg",
-            "https://static1.squarespace.com/static/521b01b3e4b0d3a6b0c90db0/t/545a50a6e4b0dc3018ad9429/1415205044746/The+Arc+de+Triomphe+at+night?format=750w",
-            "https://www.smartertravel.com/uploads/2016/03/France-ParisEiffelTowerfromBelow-DD.jpg",
-        ]
+            // "https://cdn.images.express.co.uk/img/dynamic/78/590x/paris-eiffel-tower-767204.jpg",
+            "https://static1.squarespace.com/static/521b01b3e4b0d3a6b0c90db0/t/545a50a6e4b0dc3018ad9429/1415205044746/The+Arc+de+Triomphe+at+night?format=750w"
+            // "https://www.smartertravel.com/uploads/2016/03/France-ParisEiffelTowerfromBelow-DD.jpg",
+            ],
+
     },
 
     {
         id: 2,
         name: "Arc de Triomphe",
         location: {
-            x: 48.8738,
+            x: 48.8738, 
             y: 2.295423
         },
-        description: "The Arc de Triomphe de l'Étoile is one of the most famous monuments in Paris, standing at the western end of the Champs-Élysées at the center of Place Charles de Gaulle, formerly named Place de l'Étoile — the étoile or star of the juncture formed by its twelve radiating avenues. The Arc de Triomphe should not be confused with a smaller arch, the Arc de Triomphe du Carrousel, which stands west of the Louvre. The Arc de Triomphe honours those who fought and died for France in the French Revolutionary and Napoleonic Wars, with the names of all French victories and generals inscribed on its inner and outer surfaces. Beneath its vault lies the Tomb of the Unknown Soldier from World War I.",
+        description: "There are hundreds of triumphal arches all over the world, but without the slightest doubt, none are as monumental as that of Paris, photos of which really do not do it justice. Only standing before it can you appreciate its true size. Its 50 metres height and 45 metres width make it one of the biggest in the world. The Arc de Triomphe is in the Place de l’Etoile, at the western end of the avenue of the Champs Elysées.",
         tags: ["monument"],
         price: "12 euros",
         photos: [
@@ -56,17 +56,18 @@ db.places.insertMany([{
             "http://www.letzgocitytours.com/wp-content/uploads/2015/01/Paris-Arc-3-Arc-De-Triomphe-Champs-Elysees-Highlights-3.jpg",
             "https://static.thousandwonders.net/Arc.de.Triomphe.360.7166.jpg",
             "http://www.paris.opentour.com/wp-content/uploads/arc-de-triomphe-1024x576.jpg"
-        ]
+        ],
+        audio: "/audio/Arc de Triomphe.mp3"
     },
 
     {
         id: 3,
         name: "Musée d'Orsay",
         location: {
-            x: 48.860,
+            x: 48.860, 
             y: 2.326639
         },
-        description: "The Musée d'Orsay is a museum in Paris, France, on the Left Bank of the Seine. It is housed in the former Gare d'Orsay, a Beaux-Arts railway station built between 1898 and 1900. The museum holds mainly French art dating from 1848 to 1914, including paintings, sculptures, furniture, and photography. It houses the largest collection of impressionist and post-Impressionist masterpieces in the world, by painters including Monet, Manet, Degas, Renoir, Cézanne, Seurat, Sisley, Gauguin, and Van Gogh. Many of these works were held at the Galerie nationale du Jeu de Paume prior to the museum's opening in 1986. It is one of the largest art museums in Europe.",
+        description: "Forming a large area dedicated to art the Orsay Museum forms a complex with the Louvre, which is practically opposite. Despite being one of the newest museums in France, it is the third most visited.",
         tags: ["museum"],
         price: 13.5,
         photos: [
@@ -75,7 +76,8 @@ db.places.insertMany([{
             "http://www.thatmuse.com/files/museum_thumbnail_7.jpg",
             "http://www.parismuseumpass.com/datas/musees/m/u/muse-drsquoorsay/xl/musee-d-orsay-50bf789dd1e2b.jpg",
             "http://www.amis-musee-orsay.org/wp-content/uploads/2016/07/Orsay-S-Boegly-MO-nef-6-2000-1000x390.png"
-        ]
+        ],
+        audio: "/audio/Musée d'Orsay.mp3"
     },
 
     {
@@ -85,7 +87,7 @@ db.places.insertMany([{
             x: 48.8530,
             y: 2.3498
         },
-        description: "Notre-Dame Cathedral or simply Notre-Dame, is a medieval Catholic cathedral on the Île de la Cité in the fourth arrondissement of Paris, France.[3] The cathedral is widely considered to be one of the finest examples of French Gothic architecture, and it is among the largest and best-known church buildings in the Catholic Church in France, and in the world. The naturalism of its sculptures and stained glass serve to contrast it with earlier Romanesque architecture. As the cathedral of the Archdiocese of Paris, Notre-Dame contains the cathedra of the Archbishop of Paris, currently Michel Aupetit. The cathedral treasury contains a reliquary, which houses some of Catholicism's most important relics, including the purported Crown of Thorns, a fragment of the True Cross, and one of the Holy Nails. In the 1790s, Notre-Dame suffered desecration in the radical phase of the French Revolution when much of its religious imagery was damaged or destroyed. An extensive restoration supervised by Eugène Viollet-le-Duc began in 1845. A project of further restoration and maintenance began in 1991.",
+        description: "The Notre Dame Cathedral in Paris is more than just a church, it is the authentic heart of Paris. You cannot imagine it without the mythical Quasimodo hanging from its gargoyles or ringing the bells. Thanks to Victor Hugo’s “Hunchback of Notre Dame”, this cathedral has become one of the symbols of Paris and of all France. Although it is not the biggest cathedral in the country it is one of the best representatives of European Gothic art.",
         tags: ["monument"],
         price: 0,
         photos: [
@@ -94,7 +96,8 @@ db.places.insertMany([{
             "https://static.thousandwonders.net/Notre-Dame.de.Paris.original.423.jpg",
             "https://en.parisinfo.com/var/otcp/sites/images/node_43/node_51/node_230/cath%C3%A9drale-notre-dame-et-ses-deux-tours-%7C-630x405-%7C-%C2%A9-fotolia-dr/12507489-1-fre-FR/Cath%C3%A9drale-Notre-Dame-et-ses-deux-tours-%7C-630x405-%7C-%C2%A9-Fotolia-DR.jpg",
             "https://media.npr.org/assets/img/2017/11/10/ap_17312720371710-4130b11d203d63f460a3641e50208ab4efaa2be4-s900-c85.jpg"
-        ]
+        ],
+        audio: "/audio/"
     },
 
     {
@@ -104,7 +107,7 @@ db.places.insertMany([{
             x: 48.5140,
             y: 2.2011
         },
-        description: "The Louvre Museum is the world's largest art museum and a historic monument in Paris, France. A central landmark of the city, it is located on the Right Bank of the Seine in the city's 1st arrondissement (district or ward). Approximately 38,000 objects from prehistory to the 21st century are exhibited over an area of 72,735 square metres (782,910 square feet). In 2017, the Louvre was the world's most visited art museum, receiving 8.1 million visitors.",
+        description: "The Museum of the Louvre is one of the most important and oldest museums in the world. Its collections cover the art of all times and cultures in around three-hundred thousand items. Of course, the museum is the biggest in Paris and the third largest in the world. You can tell by the fact that it covers 160,000 square metres.",
         tags: ["museum"],
         price: 19.50,
         photos: [
@@ -113,7 +116,8 @@ db.places.insertMany([{
             "http://www.eurotriptips.com/wp-content/uploads/2013/02/06-IMG_5636.jpg",
             "https://i.pinimg.com/originals/e0/91/b8/e091b802e6cf7d257075a13b23153e09.jpg",
             "https://pre00.deviantart.net/043c/th/pre/f/2010/326/a/5/inverse_pyramid__louvre_museum_by_hassansagheer-d33d9ky.jpg"
-        ]
+        ],
+        audio: "/audio/Museum of The Louvre.mp3"
     },
 
     {
@@ -123,7 +127,7 @@ db.places.insertMany([{
             x: 48.5219,
             y: 2.1954
         },
-        description: "The Palais Garnier is a 1,979-seat opera house, which was built from 1861 to 1875 for the Paris Opera. It was called the Salle des Capucines, because of its location on the Boulevard des Capucines in the 9th arrondissement of Paris, but soon became known as the Palais Garnier, in recognition of its opulence and its architect, Charles Garnier. The theatre is also often referred to as the Opéra Garnier (French About this sound  (help·info)) and historically was known as the Opéra de Paris or simply the Opéra,[7] as it was the primary home of the Paris Opera and its associated Paris Opera Ballet until 1989, when the Opéra Bastille opened at the Place de la Bastille. The Paris Opera now mainly uses the Palais Garnier for ballet.",
+        description: "Napoleon III wanted to build an “Imperial Academy of Music and Dance”. With this in mind he organised an international tender for which more than 170 projects were presented as bids. The winner was a young architect about whom practically nothing was known in Paris. His name was Charles Garnier. The construction of the palace formed part of an ambitious restructuring plan for Paris designed by Baron Haussmann in the mid-19th century.",
         tags: ["monument", "concert"],
         price: -1,
         photos: [
@@ -132,7 +136,8 @@ db.places.insertMany([{
             "https://upload.wikimedia.org/wikipedia/commons/1/18/Opera_Garnier_Grand_Escalier.jpg",
             "https://en.parisinfo.com/var/otcp/sites/images/node_43/node_51/node_77884/node_77888/palais-garnier-op%C3%A9ra-de-paris-salle-principale-%7C-630x405-%7C-%C2%A9-otcp/16109107-1-fre-FR/Palais-Garnier-Op%C3%A9ra-de-Paris-Salle-Principale-%7C-630x405-%7C-%C2%A9-OTCP.jpg",
             "https://cdn.pariscityvision.com/media/catalog/product/cache/1/image/755x433/9df78eab33525d08d6e5fb8d27136e95/L/e/Les-Mystere-de-l-Opera-Garnier-589206e0e0a08.jpeg"
-        ]
+        ],
+        audio: "/audio/Opéra Garnier.mp3"
     },
 
     {
@@ -157,7 +162,7 @@ db.places.insertMany([{
             x: 48.5156,
             y: 2.1916
         },
-        description: "The Place de la Concorde is one of the major public squares in Paris, France. Measuring 8.64 hectares (21.3 acres) in area, it is the largest square in the French capital. It is located in the city's eighth arrondissement, at the eastern end of the Champs-Élysées. It was the site of many notable public executions during the French Revolution.",
+        description: "If there is a square in Paris whose name does not do justice to its historical past, it is the Place de la Concorde.More than one thousand heads rolled off the guillotine in this square, showing that there was not as much concord as perhaps the name suggests.It is one of the most beautiful and largest squares in Paris.And measuring more than 8 hectares, it is also one of the largest in Europe.",
         tags: ["monument"],
         price: 0,
         photos: [
@@ -166,12 +171,13 @@ db.places.insertMany([{
             "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Place_de_la_Concorde_from_the_Eiffel_Tower%2C_Paris_April_2011.jpg/1200px-Place_de_la_Concorde_from_the_Eiffel_Tower%2C_Paris_April_2011.jpg",
             "https://traveldigg.com/wp-content/uploads/2016/06/Place-De-La-Concorde-At-Night.jpg",
             "https://images.frenchly.us/2016/12/place-de-la-concorde-ferris-wheel-paris.jpg"
-        ]
+        ],
+        audio: "/audio/Place de la Concorde.mp3"
     },
 
     {
         id: 9,
-        name: "Tour Eiffel",
+        name: "Sephora",
         location: {
             x: 48.87156,
             y: 2.30533
@@ -191,7 +197,7 @@ db.places.insertMany([{
             x: 48.5149,
             y: 2.1849
         },
-        description: "The Pont Alexandre III is a deck arch bridge that spans the Seine in Paris. It connects the Champs-Élysées quarter with those of the Invalides and Eiffel Tower. The bridge is widely regarded as the most ornate, extravagant bridge in the city. It is classified as a French Monument historique since 1975.",
+        description: "Pont Alexandre III is considered as the most beautiful bridge in Paris and joins Les Invalides with the Petit and Grand Palais. Although many people believe that it was Alexander III who placed the first stone, you should be aware that it was Tzar Nicholas II, his successor, who wanted to pay homage to his father and give the bridge his name.The works began in 1896 and the bridge was opened in 1900 as part of the Universal Exhibition.",
         tags: ["monument"],
         price: 0,
         photos: [
@@ -200,6 +206,19 @@ db.places.insertMany([{
             "https://thumbs.dreamstime.com/b/pont-alexandre-iii-bridge-hotel-des-invalides-paris-france-over-river-seine-background-sunny-summer-morning-96328775.jpg",
             "https://www.travelfranceonline.com/wp-content/uploads/2013/05/Pont-Alexandre-III-and-Grand-Palais-Paris.jpg",
             "http://www.finetraveling.com/images/poi/Pont-Alexandre-III-2bfe4251-d5b9-4a82-abe5-4eee37ae9f8c-74723536-and-t-and-t-PONT-ALEXANDRE-III8797.jpg"
-        ]
-    }])
+        ],
+        audio: "/audio/Pont Alenxandre III.mp3"
+    },
 
+];
+
+attractions[
+    "monument",
+    "sight",
+    "museum",
+    "concert",
+    "shopping",
+    "food",
+    "nightlift",
+    "casino"
+];

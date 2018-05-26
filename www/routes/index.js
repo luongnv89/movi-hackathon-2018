@@ -25,6 +25,48 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   return d;
 }
 
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+//:::                                                                         :::
+//:::  This routine calculates the distance between two points (given the     :::
+//:::  latitude/longitude of those points). It is being used to calculate     :::
+//:::  the distance between two locations using GeoDataSource (TM) prodducts  :::
+//:::                                                                         :::
+//:::  Definitions:                                                           :::
+//:::    South latitudes are negative, east longitudes are positive           :::
+//:::                                                                         :::
+//:::  Passed to function:                                                    :::
+//:::    lat1, lon1 = Latitude and Longitude of point 1 (in decimal degrees)  :::
+//:::    lat2, lon2 = Latitude and Longitude of point 2 (in decimal degrees)  :::
+//:::    unit = the unit you desire for results                               :::
+//:::           where: 'M' is statute miles (default)                         :::
+//:::                  'K' is kilometers                                      :::
+//:::                  'N' is nautical miles                                  :::
+//:::                                                                         :::
+//:::  Worldwide cities and other features databases with latitude longitude  :::
+//:::  are available at https://www.geodatasource.com                          :::
+//:::                                                                         :::
+//:::  For enquiries, please contact sales@geodatasource.com                  :::
+//:::                                                                         :::
+//:::  Official Web site: https://www.geodatasource.com                        :::
+//:::                                                                         :::
+//:::               GeoDataSource.com (C) All Rights Reserved 2017            :::
+//:::                                                                         :::
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+function distance(lat1, lon1, lat2, lon2, unit) {
+ var radlat1 = Math.PI * lat1/180
+ var radlat2 = Math.PI * lat2/180
+ var theta = lon1-lon2
+ var radtheta = Math.PI * theta/180
+ var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+ dist = Math.acos(dist)
+ dist = dist * 180/Math.PI
+ dist = dist * 60 * 1.1515
+ if (unit=="K") { dist = dist * 1.609344 }
+ if (unit=="N") { dist = dist * 0.8684 }
+ return dist
+}
+
 function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
@@ -95,37 +137,34 @@ function get_user_by_id(u_id) {
   });
 }
 
+router.get("/places", function( req, res, next ){
+   db.collection("places").find({}).toArray(function (erro, place) {
+      if (erro || (place === null)) {
+        res.send([]);
+      }
+      else {
+        // console.log('place: ',place);
+        res.send(place);
+      }
+    });
+})
+
 router.post('/nearby', function (req, res, next) {
   var user_id = req.body.user_id;
-  var current_x = req.body.x;
+  var current_x = req.body.x; //latitude
   var current_y = req.body.y;
   var tags = req.body.tags; // must not be null
-  var places = null;
+  
   // Calculate to get the location
   // Request server to get the t_places and r_places
-//  get_nearby_places(tags, current_x, current_y,function (data) {
-//      res.send({ places: data });
-//  });
+  get_nearby_places(tags, current_x, current_y,function (data) {
+      res.send({ places: data });
+  });
   
   res.send({hihi:1});
 
 })
 
-function get_nearby_places(tags, location_x, location_y, callback) {
-  if (tags &&
-    location_x &&
-    location_y) {
-    db.collection("places").find({ tags: tags }).toArray(function (erro, place) {
-      if (erro || (place === null)) {
-        callback(null);
-      }
-      else {
-        //TODO: remove places based on location
-        callback(place);
-      }
-    });
-  }
-};
 
 function get_places(tags, callback) {
   if (tags) {
