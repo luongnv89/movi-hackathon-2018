@@ -127,7 +127,7 @@ function addMarker(lat, long, photo, title, id) {
    marker.setMap(map);
    
    marker.addListener('click', function( ev) {
-      window.location = "/place?id="+ id ;
+      window.location = "/place?place_id="+ id ;
     }, id);
    
    markerList[ lat + "-" + long ] = marker;

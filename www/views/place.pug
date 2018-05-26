@@ -1,0 +1,49 @@
+doctype html
+html
+  head
+    title City Guide Car
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u', crossorigin='anonymous')
+    // Optional theme
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css', integrity='sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp', crossorigin='anonymous')
+    link(rel="stylesheet",href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp",crossorigin="anonymous")
+    link(rel="stylesheet",href="/stylesheets/style.css")
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa', crossorigin='anonymous')
+  body
+    .container.text-center#main-content
+      #carousel-example-generic.carousel.slide(data-ride='carousel')
+        // Indicators
+        ol.carousel-indicators
+          each image, i in place.photos
+            if i==0
+              li.active(data-target='#carousel-example-generic', data-slide-to={i})
+            else
+              li(data-target='#carousel-example-generic', data-slide-to={i})
+        // Wrapper for slides
+        .carousel-inner(role='listbox')
+          each image, i in place.photos
+            if i==0
+              .item.active
+                img.place_image(src=image, alt='...')
+            else
+              .item
+                img.place_image(src=image, alt='...')
+        // Controls
+        a.left.carousel-control(href='#carousel-example-generic', role='button', data-slide='prev')
+          span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+          span.sr-only Previous
+        a.right.carousel-control(href='#carousel-example-generic', role='button', data-slide='next')
+          span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+          span.sr-only Next
+    h1=place.name
+    h3 Price:
+      if place.price == -1
+        strong   unknown
+      else
+        strong  #{place.price}$
+    p=place.description
+    audio.hidden(src=place.audio,autoplay=true)
+    button.btn.btn-lg.btn-danger#startButton
+      .fa.fa-times-circle   Close

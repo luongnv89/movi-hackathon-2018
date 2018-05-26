@@ -42,8 +42,8 @@ body{
 
 body{
   font-size: 18px;
-}  
-  
+}
+
 div.media-left > img{
   width: 100px;
   height: auto;
@@ -79,4 +79,12 @@ div.media-left > img{
 
 .selected-place{
   background-color: lightgreen;
+}
+
+#logo{
+  height: 30px;
+}
+
+.place_image{
+  height: 50%;
 }
