@@ -1,6 +1,6 @@
 // Assign handlers immediately after making the request,
 // and remember the jqxhr object for this request
-var user_id = 1;
+var user_id = 2;
 var location_x = 48.831357;
 var location_y = 2.284441;
 var user_name = 'User';
@@ -28,8 +28,7 @@ function getPlaces(user_id, location_x, location_y, tags) {
   // console.log('tags:',tags);
   var jqxhr = $.post("/search", { user_id: user_id, x: location_x, y: location_y, tags: JSON.stringify(tags) })
     .done(function (data) {
-      // console.log('success with data: ', data);
-      selected_tags = JSON.parse(data.tags);
+      selected_tags = data.tags;
       update_main_content(user_name, all_tags, selected_tags, data.places, location_x, location_y);
     })
     .fail(function (e) {

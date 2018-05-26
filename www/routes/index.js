@@ -16,7 +16,7 @@ router.post('/', function (req, res, next) {
   var user_id = Number(req.body.user_id);
   var tags = ['museum'];
   var places = null;
-  if (user_id !== '') {
+  if (user_id !== 0) {
     // This is the first request -> need to request to get user's name and user's tags
     get_user_by_id(user_id,function (u_data) {
       if (u_data){
@@ -33,12 +33,12 @@ router.post('/', function (req, res, next) {
 })
 
 router.post('/search', function (req, res, next) {
-  var user_id = req.body.user_id;
+  var user_id = Number(req.body.user_id);
   var current_x = req.body.x;
   var current_y = req.body.y;
-  var tags = req.body.tags; // must not be null
+  var tags = JSON.parse(req.body.tags); // must not be null
   var places = null;
-  if (user_id !== '') {
+  if (user_id !== 0) {
     // This is the first request -> need to request to get user's name and user's tags
     update_user_tags(user_id, tags);
   }
