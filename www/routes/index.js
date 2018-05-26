@@ -47,10 +47,8 @@ router.post('/', function (req, res, next) {
   // Calculate to get the location
   // Request server to get the t_places and r_places
   get_places(tags,function (data) {
-    if(data){
       all_tags = get_all_tags();
       res.send({ user_name: u_name, places: data, all_tags: all_tags, tags: tags });
-    }
   });
 })
 
@@ -68,9 +66,7 @@ router.post('/search', function (req, res, next) {
   // Calculate to get the location
   // Request server to get the t_places and r_places
   get_places(tags,function (data) {
-    if(data){
       res.send({ places: data, tags: tags });
-    }
   });
 });
 
@@ -107,21 +103,23 @@ router.post('/nearby', function (req, res, next) {
   var places = null;
   // Calculate to get the location
   // Request server to get the t_places and r_places
-  places = get_nearby_places(tags, current_x, current_y);
-  res.send({ places: places });
+  get_nearby_places(tags, current_x, current_y,function (data) {
+      res.send({ places: data });
+  });
+
 })
 
-function get_nearby_places(tags, location_x, location_y) {
+function get_nearby_places(tags, location_x, location_y, callback) {
   if (tags &&
     location_x &&
     location_y) {
     db.collection("places").find({ tags: tags }).toArray(function (erro, place) {
       if (erro || (place === null)) {
-        res.render('error', { message: 'Error', error: { status: 'Find place failed', stack: '' } });
+        callback(null);
       }
       else {
         //TODO: remove places based on location
-        return place;
+        callback(place);
       }
     });
   }
