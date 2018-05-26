@@ -15,7 +15,7 @@ db.users.insertMany([{
     {
         id: 2,
         name: "Hoa",
-        tag:[
+        tags:[
             "shopping", "sight", "monument"
         ]
     }])
@@ -29,7 +29,7 @@ db.places.insertMany([{
             y: 2.17402
         },
         description:"The Eiffel Tower is a wrought iron lattice tower on the Champ de Mars in Paris, France. It is named after the engineer Gustave Eiffel, whose company designed and built the tower. Constructed from 1887–89 as the entrance to the 1889 World's Fair, it was initially criticized by some of France's leading artists and intellectuals for its design, but it has become a global cultural icon of France and one of the most recognisable structures in the world. The Eiffel Tower is the most-visited paid monument in the world; 6.91 million people ascended it in 2015. The tower is 324 metres (1,063 ft) tall, about the same height as an 81-storey building, and the tallest structure in Paris. Its base is square, measuring 125 metres (410 ft) on each side. During its construction, the Eiffel Tower surpassed the Washington Monument to become the tallest man-made structure in the world, a title it held for 41 years until the Chrysler Building in New York City was finished in 1930. Due to the addition of a broadcasting aerial at the top of the tower in 1957, it is now taller than the Chrysler Building by 5.2 metres (17 ft). Excluding transmitters, the Eiffel Tower is the second tallest structure in France after the Millau Viaduct.",
-        tag:["monument", "sight"],
+        tags:["monument", "sight"],
         price: 25,
         photos: [
             "https://www.planetware.com/photos-large/F/eiffel-tower.jpg",
@@ -48,7 +48,7 @@ db.places.insertMany([{
             y: 2.295423
         },
         description: "The Arc de Triomphe de l'Étoile is one of the most famous monuments in Paris, standing at the western end of the Champs-Élysées at the center of Place Charles de Gaulle, formerly named Place de l'Étoile — the étoile or star of the juncture formed by its twelve radiating avenues. The Arc de Triomphe should not be confused with a smaller arch, the Arc de Triomphe du Carrousel, which stands west of the Louvre. The Arc de Triomphe honours those who fought and died for France in the French Revolutionary and Napoleonic Wars, with the names of all French victories and generals inscribed on its inner and outer surfaces. Beneath its vault lies the Tomb of the Unknown Soldier from World War I.",
-        tag: ["monument"],
+        tags: ["monument"],
         price: "12 euros",
         photos: [
             "https://cdn.pariscityvision.com/media/catalog/product/cache/1/image/755x433/9df78eab33525d08d6e5fb8d27136e95/c/a/carc-06-arc-de-triomphe.jpg",
@@ -67,7 +67,7 @@ db.places.insertMany([{
             y: 2.326639
         },
         description: "The Musée d'Orsay is a museum in Paris, France, on the Left Bank of the Seine. It is housed in the former Gare d'Orsay, a Beaux-Arts railway station built between 1898 and 1900. The museum holds mainly French art dating from 1848 to 1914, including paintings, sculptures, furniture, and photography. It houses the largest collection of impressionist and post-Impressionist masterpieces in the world, by painters including Monet, Manet, Degas, Renoir, Cézanne, Seurat, Sisley, Gauguin, and Van Gogh. Many of these works were held at the Galerie nationale du Jeu de Paume prior to the museum's opening in 1986. It is one of the largest art museums in Europe.",
-        tag: ["museum"],
+        tags: ["museum"],
         price: 13.5,
         photos: [
             "https://www.discoverwalks.com/blog/wp-content/uploads/2016/08/orsay-museum-big.jpg",
@@ -86,7 +86,7 @@ db.places.insertMany([{
             y: 2.3498
         },
         description: "Notre-Dame Cathedral or simply Notre-Dame, is a medieval Catholic cathedral on the Île de la Cité in the fourth arrondissement of Paris, France.[3] The cathedral is widely considered to be one of the finest examples of French Gothic architecture, and it is among the largest and best-known church buildings in the Catholic Church in France, and in the world. The naturalism of its sculptures and stained glass serve to contrast it with earlier Romanesque architecture. As the cathedral of the Archdiocese of Paris, Notre-Dame contains the cathedra of the Archbishop of Paris, currently Michel Aupetit. The cathedral treasury contains a reliquary, which houses some of Catholicism's most important relics, including the purported Crown of Thorns, a fragment of the True Cross, and one of the Holy Nails. In the 1790s, Notre-Dame suffered desecration in the radical phase of the French Revolution when much of its religious imagery was damaged or destroyed. An extensive restoration supervised by Eugène Viollet-le-Duc began in 1845. A project of further restoration and maintenance began in 1991.",
-        tag: ["monument"],
+        tags: ["monument"],
         price: 0,
         photos: [
             "http://www.aviewoncities.com/img/paris/kvefr1367s.jpg",
@@ -105,7 +105,7 @@ db.places.insertMany([{
             y: 2.2011
         },
         description: "The Louvre Museum is the world's largest art museum and a historic monument in Paris, France. A central landmark of the city, it is located on the Right Bank of the Seine in the city's 1st arrondissement (district or ward). Approximately 38,000 objects from prehistory to the 21st century are exhibited over an area of 72,735 square metres (782,910 square feet). In 2017, the Louvre was the world's most visited art museum, receiving 8.1 million visitors.",
-        tag: ["museum"],
+        tags: ["museum"],
         price: 19.50,
         photos: [
             "https://cdn-imgix.headout.com/tour/5980/TOUR-IMAGE/1dd96726-9311-41f5-ac66-c729a8761275-3909-paris-louvre-museum-priority-access-with-flexible-entry-time-01.jpg",
@@ -124,7 +124,7 @@ db.places.insertMany([{
             y: 2.1954
         },
         description: "The Palais Garnier is a 1,979-seat opera house, which was built from 1861 to 1875 for the Paris Opera. It was called the Salle des Capucines, because of its location on the Boulevard des Capucines in the 9th arrondissement of Paris, but soon became known as the Palais Garnier, in recognition of its opulence and its architect, Charles Garnier. The theatre is also often referred to as the Opéra Garnier (French About this sound  (help·info)) and historically was known as the Opéra de Paris or simply the Opéra,[7] as it was the primary home of the Paris Opera and its associated Paris Opera Ballet until 1989, when the Opéra Bastille opened at the Place de la Bastille. The Paris Opera now mainly uses the Palais Garnier for ballet.",
-        tag: ["monument", "concert"],
+        tags: ["monument", "concert"],
         price: -1,
         photos: [
             "https://res.cloudinary.com/opera-national-de-paris/image/upload/c_crop%2Ch_532%2Cw_945%2Cx_0%2Cy_38/c_fit%2Cw_870/f_auto/v1/user_photos/reyhhxf2rfeypev7iksw",
@@ -143,7 +143,7 @@ db.places.insertMany([{
             y: 2.328469
         },
         description: "Printemps is a French department store chain. The Printemps stores focus on beauty, lifestyle, fashion, accessories, and men's wear.",
-        tag: ["shopping"],
+        tags: ["shopping"],
         price: -1,
         photos: [
             "http://www.kelmagasin.com/img3/printemps.jpg"
@@ -158,7 +158,7 @@ db.places.insertMany([{
             y: 2.1916
         },
         description: "The Place de la Concorde is one of the major public squares in Paris, France. Measuring 8.64 hectares (21.3 acres) in area, it is the largest square in the French capital. It is located in the city's eighth arrondissement, at the eastern end of the Champs-Élysées. It was the site of many notable public executions during the French Revolution.",
-        tag: ["monument"],
+        tags: ["monument"],
         price: 0,
         photos: [
             "https://cdn.britannica.com/700x450/15/178015-004-9E86D314.jpg",
@@ -177,7 +177,7 @@ db.places.insertMany([{
             y: 2.30533
         },
         description: "Retail chain with a selection of upmarket makeup, perfumes, beauty & skincare products.",
-        tag: ["shopping"],
+        tags: ["shopping"],
         price: 0,
         photos: [
             "http://www.lesbonsplansdenaima.fr/wp-content/uploads/2018/04/3260796300.jpg"
@@ -192,7 +192,7 @@ db.places.insertMany([{
             y: 2.1849
         },
         description: "The Pont Alexandre III is a deck arch bridge that spans the Seine in Paris. It connects the Champs-Élysées quarter with those of the Invalides and Eiffel Tower. The bridge is widely regarded as the most ornate, extravagant bridge in the city. It is classified as a French Monument historique since 1975.",
-        tag: ["monument"],
+        tags: ["monument"],
         price: 0,
         photos: [
             "https://en.parisinfo.com/var/otcp/sites/images/media/1.-photos/02.-sites-culturels-630-x-405/pont-alexandre-iii-grand-palais-630x405-c-thinkstock/37848-1-fre-FR/Pont-Alexandre-III-Grand-Palais-630x405-C-Thinkstock.jpg",
