@@ -1,6 +1,18 @@
-body{
+
+html,
+body,
+#map{
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
   font-size: 18px;
 }
+  
+body{
+  font-size: 18px;
+}  
+  
 div.media-left > img{
   width: 100px;
   height: auto;

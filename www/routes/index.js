@@ -82,6 +82,10 @@ router.get('/', function (req, res, next) {
   res.render('index');
 });
 
+router.get('/map', function(req, res, next) {
+  res.render('map', { title: 'Express' });
+});
+
 function get_user_by_id(u_id) {
   //res.render('view1', { UserName: 'Anonymous'});
   db.collection("users").findOne({ u_id: 1 }, function (err, user) {
