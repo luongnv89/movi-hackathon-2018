@@ -50,10 +50,15 @@ router.post('/search', function (req, res, next) {
 });
 
 
-router.post('/place', function (req, res, next) {
-  var place_id = Number(req.body.place_id);
+router.get('/place', function (req, res, next) {
+  console.log('[/place]');
+  var place_id = Number(req.query.place_id);
   get_place_by_id(place_id, function (data) {
-    res.send(data);
+    if(data){
+      res.render('place', {place : data});
+    }else{
+      res.send('error!');
+    }
   })
 });
 

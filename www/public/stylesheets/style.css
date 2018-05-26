@@ -53,3 +53,7 @@ div.media-left > img{
 #logo{
   height: 30px;
 }
+
+.place_image{
+  height: 50%;
+}
