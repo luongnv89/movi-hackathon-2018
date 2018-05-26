@@ -14,19 +14,19 @@ function text2speech( text, callbackOnEnd ){
 }
 
 
-//const recognition = new webkitSpeechRecognition();
+const recognition = new webkitSpeechRecognition();
 //recognition.continuous = true;
-////recognition.interimResults = true;
-//
-//function speech2text( callbackOnEnd ){
-//   recognition.onresult = function(event) { 
-//      console.log(event);
-//      var text = "";
-//      for(var i=0; i<event.results.length; i++){
-//         text += event.results[i][0].transcript;
-//      }
-//      if( callbackOnEnd )
-//         callbackOnEnd( text ); 
-//   }
-//   recognition.start();
-//}
+//recognition.interimResults = true;
+
+function speech2text( callbackOnEnd ){
+   recognition.onresult = function(event) { 
+      console.log(event);
+      var text = "";
+      for(var i=0; i<event.results.length; i++){
+         text += event.results[i][0].transcript;
+      }
+      if( callbackOnEnd )
+         callbackOnEnd( text ); 
+   }
+   recognition.start();
+}

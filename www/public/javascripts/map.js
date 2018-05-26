@@ -222,6 +222,17 @@ function showConfirmDialog(){
    $("#cancelBtn").on("click", function(){
       window.location="/";
    });
+   
+   speech2text( function( text ){
+      text = text.toLocaleLowerCase();
+      console.log( text );
+      if( text.indexOf("start") > -1 || text.indexOf("go") > -1){
+         hideInfo();
+         showTracking();
+      }else if( text.indexOf("cancel") > -1 ){
+         window.location="/";
+      }
+   });
 }
 
 function showInfo(){
