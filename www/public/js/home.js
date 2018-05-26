@@ -46,16 +46,20 @@ function update_main_content(user_name, all_tags, s_tags, places, location_x, lo
 }
 
 function create_new_content(user_name, all_tags, s_tags, places, location_x, location_y) {
-  var headerDOM = create_header_DOM(user_name);
-  var tagsDOM = create_tags_DOM(all_tags, s_tags);
-  var placesDOM = create_list_place_DOM(places);
-  var startButton = create_start_button(location_x, location_y, places)
-
   var newMainDOM = document.createElement('div');
-  // newMainDOM.appendChild(headerDOM);
-  newMainDOM.appendChild(tagsDOM);
-  newMainDOM.appendChild(placesDOM);
 
+  var headerDOM = create_header_DOM(user_name);
+  // newMainDOM.appendChild(headerDOM);
+
+  var tagsDOM = create_tags_DOM(all_tags, s_tags);
+  newMainDOM.appendChild(tagsDOM);
+
+  if(places){
+    var placesDOM = create_list_place_DOM(places);
+    newMainDOM.appendChild(placesDOM);
+  }
+
+  var startButton = create_start_button(location_x, location_y, places)
   newMainDOM.appendChild(startButton);
 
   return newMainDOM;
