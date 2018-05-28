@@ -177,7 +177,7 @@ function showTracking() {
       index ++;
       
       if (index < arrayOfTrackingPoints.length) 
-         setTimeout( _detail, 300);
+         setTimeout( _detail, 200);
       else{
          //end of internerate
          text2speech("You have arrived your destination. Have a good day!");
@@ -186,11 +186,11 @@ function showTracking() {
             setTimeout( function( p ){
                loadDetailPlace( "/place?place_id=" + p.id );
                isEndOfTrip = true;
-            }, 4000, p);
+            }, 3000, p);
             
       }
    }
-   setTimeout( _detail, 1000);
+   setTimeout( _detail, 500);
 }
 
 
